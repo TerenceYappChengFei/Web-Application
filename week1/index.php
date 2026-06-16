@@ -4,6 +4,7 @@ $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
 
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -21,21 +22,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $userPassword = $_POST["password"];
 
   // Check if email and password exist in student table
-  $sql = "SELECT * FROM student WHERE email = ? AND password = ?";
+   $sql = "SELECT * FROM student 
+          WHERE email = '$email' 
+          AND password = '$userPassword'";
 
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ss", $email, $userPassword);
-  $stmt->execute();
+  $result = mysqli_query($conn, $sql);
 
-  $result = $stmt->get_result();
-
-  if ($result->num_rows > 0) {
-    $message = "User Found";
+  if (mysqli_num_rows($result) > 0) {
+    //this text tells us that user is found
+    //$message = "User Found";
+    header("<Location: class="">
+    <week1>booklist.php");
   } else {
     $message = "No User Found";
   }
-
-  $stmt->close();
 }
 
 $conn->close();
