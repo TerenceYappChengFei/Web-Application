@@ -55,7 +55,7 @@ if ($conn->connect_error) {
                 <td><?php echo $row['title'] ?></td>
                 <td><?php echo $row['author'] ?></td>
                 <td><?php echo $row['description'] ?></td>
-                <td><?php echo $row['price'] ?></td>
+                <td><?php   echo $row['price'] ?></td>
                 <td><button>Delete</button></td>
                 <td><input type="button" value="Edit"></a></td>
             </tr>
@@ -67,5 +67,13 @@ if ($conn->connect_error) {
         ?>
 
     </table>
+
+    <button><a href="profile.php"><input type="submit" value="Profile"></a></button>
+    <button><a href="../Exercise1/addBook.php"><input type="submit" value="Add Book"></a></button>
+    <button><a href="../Exercise1/editProfile.php"><input type="submit" value="Edit Profile"></a></button>
+    <button><a href=""><input type="submit" value="Logout"></a></a></button>
+
+
+
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
@@ -10,6 +12,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+$email = $_SESSION['email'];
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +36,7 @@ if ($conn->connect_error) {
 </style>
 
 <body>
+    <button><a class="link" href="booklist.php">Back</a></button>
      <table width="1100">
         <tr>
             <th>Name</th>
@@ -42,7 +46,7 @@ if ($conn->connect_error) {
 
         <?php
 
-        $query = "SELECT * FROM student";
+        $query = "SELECT * FROM student WHERE email = '$email'";
 
         $result = mysqli_query($conn, $query);
 

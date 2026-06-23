@@ -1,8 +1,13 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
+
+if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
+}
 
 
 // Create connection
@@ -29,10 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) > 0) {
-    //this text tells us that user is found
-    //$message = "User Found";
-    header("<Location: class="">
-    <week1>booklist.php");
+    $_SESSION['email'] = $_POST['email'];
+    header("Location: booklist.php");
+    exit();
   } else {
     $message = "No User Found";
   }
