@@ -53,6 +53,7 @@ if ($conn->connect_error) {
                 <td><textarea cols='50' input type=text name=description></textarea></td>
                 <td><input type="text" name="price" ></td>
                 <td><input type="submit" value="Add"></td>
+                </form>
         </tr>
     </table>
 </body>
