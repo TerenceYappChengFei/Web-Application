@@ -1,23 +1,31 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
+
+
+if(!isset($_SESSION["email"])) {
+    header("Location: login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booklist</title>
+    <title>Week2 - Booklist</title>
 </head>
 
 <style>
@@ -43,37 +51,36 @@ if ($conn->connect_error) {
         </tr>
 
         <?php
-
         $query = "SELECT * FROM booklist";
 
         $result = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
-            <tr>
-                <td><?php echo $row['ISBN'] ?></td>
-                <td><?php echo $row['title'] ?></td>
-                <td><?php echo $row['author'] ?></td>
-                <td><?php echo $row['description'] ?></td>
-                <td><?php   echo $row['price'] ?></td>
-                <td><button>Delete</button></td>
-                <td><input type="button" value="Edit"></a></td>
-            </tr>
 
+            <tr>
+                <td><?php echo $row['ISBN']; ?></td>
+                <td><?php echo $row['title']; ?></td>
+                <td><?php echo $row['author']; ?></td>
+                <td><?php echo $row['description']; ?></td>
+                <td><?php echo $row['price']; ?></td>
+                <td>
+                    <a href="editBook.php?ISBN=<?php echo $row['ISBN']; ?>">
+                        <input type='button' value='Edit'>
+                    </a>
+                </td>
+                <td><button>Delete</button></td>
+            </tr>
         <?php
         }
-    mysqli_close($conn);
-        
+        mysqli_close($conn);
         ?>
 
+        <a href="profile.php"><input type="submit" value="Profile"></a>
+        <a href="../Exercise1/addBook.php"><input type="submit" value="Add Book"></a>
+        <a href="login.php"><input type="submit" value="LogOut"></a>
+
     </table>
-
-    <button><a href="profile.php"><input type="submit" value="Profile"></a></button>
-    <button><a href="../Exercise1/addBook.php"><input type="submit" value="Add Book"></a></button>
-    <button><a href="../Exercise1/editProfile.php"><input type="submit" value="Edit Profile"></a></button>
-    <button><a href=""><input type="submit" value="Logout"></a></a></button>
-
-
-
 </body>
+
 </html>
