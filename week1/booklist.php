@@ -17,6 +17,8 @@ if(!isset($_SESSION["email"])) {
     header("Location: login.php");
 }
 
+$message = "";
+
 ?>
 
 <!DOCTYPE html>

@@ -1,10 +1,16 @@
+<?php
+if (isset($_GET['error'])) {
+    echo $_GET['error'] . "</p>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
     <style>
         table {
             border-collapse: collapse;
@@ -39,7 +45,7 @@
                 <td><input type="password" name="password"></td>
                 <td><input type="password" name="confirmPassword"></td>
                 <td><input type="text" name="name"></td>
-                <td><input type="text" name="yearjoin"></td>
+                <td><input type="number" name="yearjoin"></td>
                 <td><input type="submit" value="Submit"></td>
             </form>
         </tr>

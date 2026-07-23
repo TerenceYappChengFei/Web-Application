@@ -33,11 +33,13 @@ if ($conn->connect_error) {
 </style>
 
 <body>
+    <button><a href="product.php"><input type="submit" value="Product"></a></button>
+
     <table width="1100">
         <tr>
             <th>Customer ID</th>
-            <th width="300">Title</th>
-            <th width="200">Author</th>
+            <th width="300">Username</th>
+            <th width="200">Full Name</th>
         </tr>
 
         <?php
@@ -65,7 +67,7 @@ if ($conn->connect_error) {
 
     </table>
     <button><a href="addCustomer.php"><input type="submit" value="Add Customer"></a></button>
-    <button><a href=""><input type="submit" value="Logout"></a></a></button>
+    <button><a href="index.php"><input type="submit" value="Logout"></a></a></button>
 
 
 
