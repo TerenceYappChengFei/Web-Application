@@ -40,6 +40,7 @@ if ($conn->connect_error) {
             <th>Customer ID</th>
             <th width="300">Username</th>
             <th width="200">Full Name</th>
+            <th width="200">Password</th>
         </tr>
 
         <?php
@@ -54,8 +55,14 @@ if ($conn->connect_error) {
                 <td><?php echo $row['CustomerID'] ?></td>
                 <td><?php echo $row['Username'] ?></td>
                 <td><?php echo $row['Name'] ?></td>
+                <td><?php echo $row['password'] ?></td>
+
                 <td><input type="button" value="Read"></a></td>
-                <td><input type="button" value="Edit"></a></td>
+                <td>
+                    <a href="editCustomer.php?CustomerID=<?php echo $row['CustomerID']; ?>">
+                        <input type='button' value='Edit'>
+                    </a>
+                </td>
                 <td><input type="button" value="Delete"></a></td>
             </tr>
 
