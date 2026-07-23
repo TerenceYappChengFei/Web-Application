@@ -11,9 +11,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$customerID = $_GET['CustomerID'];
+if (isset($_GET['error'])) {
+    echo $_GET['error'] . "</p>";
+}
 
-$sql = "SELECT * FROM customer WHERE CustomerID='$customerID'";
+$CustomerID = $_GET['CustomerID'];
+
+$sql = "SELECT * FROM customer WHERE CustomerID='$CustomerID'";
 $result = mysqli_query($conn, $sql);
 $customer = mysqli_fetch_assoc($result);
 ?>
@@ -48,16 +52,19 @@ $customer = mysqli_fetch_assoc($result);
             <th>Customer ID</th>
             <th>Username</th>
             <th>Full Name</th>
+            <th>Password</th>
+
         </tr>
 
         <form action="runEditCustomer.php" method="POST">
             <tr>
                 <td>
                     <?php echo $customer['CustomerID']; ?>
-                    <input type="hidden" name="customerID" value="<?php echo $customer['CustomerID']; ?>">
+                    <input type="hidden" name="CustomerID" value="<?php echo $customer['CustomerID']; ?>">
                 </td>
                 <td><input type="text" name="Username" value="<?php echo $customer['Username']; ?>"></td>
                 <td><input type="text" name="Name" value="<?php echo $customer['Name']; ?>"></td>
+                <td><input type="text" name="Password" value="<?php echo $customer['Password']; ?>"></td>
                 <td><input type="submit" value="Update"></td>
             </tr>
         </form>

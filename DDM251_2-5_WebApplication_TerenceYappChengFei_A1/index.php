@@ -23,18 +23,18 @@ $message = "";
 // Only run this when the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  $username = $_POST["username"];
-  $userPassword = $_POST["password"];
+  $username = $_POST["Username"];
+  $userPassword = $_POST["Password"];
 
   // Check if username and password exist in customer table
    $sql = "SELECT * FROM customer 
-          WHERE username = '$username' 
-          AND password = '$userPassword'";
+          WHERE Username = '$username' 
+          AND Password = '$userPassword'";
 
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) > 0) {
-    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['username'] = $_POST['Username'];
     header("Location: customer.php");
     exit();
   } else {
@@ -71,12 +71,12 @@ $conn->close();
 
   <form target="_self" method="POST">
     <h2>Enter your username:</h2>
-    <input type="text" name="username" required>
+    <input type="text" name="Username" required>
 
     <br>
 
     <h2>Password</h2>
-    <input type="password" name="password" required>
+    <input type="Password" name="Password" required>
 
     <br><br>
 

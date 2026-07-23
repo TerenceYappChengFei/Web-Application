@@ -12,22 +12,23 @@ if (!$conn) {
 }
 
 
-$customerID = $_POST["customerID"];
+$CustomerID = $_POST["CustomerID"];
 $Username = $_POST["Username"];
 $Name = $_POST["Name"];
+$Password = $_POST["Password"];
 
-if (empty($name) || empty($password) || empty($confirmPassword) || empty($yearjoin)) {
-    header("Location: editProfile.php?error=All fields must be filled");
+if (empty($Name) || empty($Password) || empty($Username) || empty($CustomerID)) {
+    header("Location: editCustomer.php?CustomerID=$CustomerID&error=All fields must be filled");
     exit();
 }
 
-if (strlen($password) < 6) {
-    header("Location: editProfile.php?error=Password must be at least 6 characters");
+if (strlen($Password) < 6) {
+    header("Location: editCustomer.php?CustomerID=$CustomerID&error=Password must be at least 6 characters");
     exit();
 }
 
 // SQL to update a record
-$sql = "UPDATE customer SET Username='$Username', Name='$Name' WHERE CustomerID='$customerID'";
+$sql = "UPDATE customer SET Username='$Username', Name='$Name', Password='$Password' WHERE CustomerID='$CustomerID'";
 
 
 if (mysqli_query($conn, $sql)) {

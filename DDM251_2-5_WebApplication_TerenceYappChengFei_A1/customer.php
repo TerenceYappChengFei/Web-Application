@@ -55,7 +55,7 @@ if ($conn->connect_error) {
                 <td><?php echo $row['CustomerID'] ?></td>
                 <td><?php echo $row['Username'] ?></td>
                 <td><?php echo $row['Name'] ?></td>
-                <td><?php echo $row['password'] ?></td>
+                <td><?php echo $row['Password'] ?></td>
 
                 <td><input type="button" value="Read"></a></td>
                 <td>
