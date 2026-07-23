@@ -15,11 +15,11 @@ if (isset($_GET['error'])) {
     echo $_GET['error'] . "</p>";
 }
 
-$CustomerID = $_GET['CustomerID'];
+$ProductID = $_GET['ProductID'];
 
-$sql = "SELECT * FROM customer WHERE CustomerID='$CustomerID'";
+$sql = "SELECT * FROM product WHERE ProductID='$ProductID'";
 $result = mysqli_query($conn, $sql);
-$customer = mysqli_fetch_assoc($result);
+$product = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
@@ -44,27 +44,26 @@ $customer = mysqli_fetch_assoc($result);
 
 <body>
     <button>
-        <a class="link" href="customer.php">Back</a>
+        <a class="link" href="product.php">Back</a>
     </button>
 
     <table width="600">
         <tr>
-            <th>Customer ID</th>
-            <th>Username</th>
-            <th>Full Name</th>
-            <th>Password</th>
-
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Unit Price (RM)</th>
+            <th>Description</th>
         </tr>
 
-        <form action="runEditCustomer.php" method="POST">
+        <form action="runEditProduct.php" method="POST">
             <tr>
                 <td>
-                    <?php echo $customer['CustomerID']; ?>
-                    <input type="hidden" name="CustomerID" value="<?php echo $customer['CustomerID']; ?>">
+                    <?php echo $product['ProductID']; ?>
+                    <input type="hidden" name="ProductID" value="<?php echo $product['ProductID']; ?>">
                 </td>
-                <td><input type="text" name="Username" value="<?php echo $customer['Username']; ?>"></td>
-                <td><input type="text" name="Name" value="<?php echo $customer['Name']; ?>"></td>
-                <td><input type="text" name="Password" value="<?php echo $customer['Password']; ?>"></td>
+                <td><input type="text" name="ProductName" value="<?php echo $product['ProductName']; ?>"></td>
+                <td><input type="text" name="UnitPrice" value="<?php echo $product['UnitPrice']; ?>"></td>
+                <td><input type="text" name="Description" value="<?php echo $product['Description']; ?>"></td>
                 <td><input type="submit" value="Update"></td>
             </tr>
         </form>

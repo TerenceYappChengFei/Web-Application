@@ -58,8 +58,11 @@ if ($conn->connect_error) {
                 <td><?php echo $row['UnitPrice'] ?></td>
                 <td><?php echo $row['Description'] ?></td>
                 <td><input type="button" value="Read"></a></td>
-                <td><input type="button" value="Edit"></a></td>
-                <td><input type="button" value="Delete"></a></td>
+                <td>
+                    <a href="editProduct.php?ProductID=<?php echo $row['ProductID']; ?>">
+                        <input type='button' value='Edit'>
+                    </a>
+                </td>                <td><input type="button" value="Delete"></a></td>
             </tr>
 
         <?php

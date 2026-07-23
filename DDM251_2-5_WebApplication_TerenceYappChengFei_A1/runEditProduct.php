@@ -12,27 +12,27 @@ if (!$conn) {
 }
 
 
-$CustomerID = $_POST["CustomerID"];
-$Username = $_POST["Username"];
-$Name = $_POST["Name"];
-$Password = $_POST["Password"];
+$ProductID = $_POST["ProductID"];
+$ProductName = $_POST["ProductName"];
+$UnitPrice = $_POST["UnitPrice"];
+$Description = $_POST["Description"];
 
-if (empty($Name) || empty($Password) || empty($Username) || empty($CustomerID)) {
-    header("Location: editCustomer.php?CustomerID=$CustomerID&error=All fields must be filled");
+if (empty($ProductName) || empty($UnitPrice) || empty($Description) || empty($ProductID)) {
+    header("Location: editProduct.php?ProductID=$ProductID&error=All fields must be filled");
     exit();
 }
 
-if (strlen($Password) < 6) {
-    header("Location: editCustomer.php?CustomerID=$CustomerID&error=Password must be at least 6 characters");
+if (!is_numeric($UnitPrice)) {
+    header("Location: editProduct.php?ProductID=$ProductID&error=Price must be a number");
     exit();
 }
 
 // SQL to update a record
-$sql = "UPDATE customer SET Username='$Username', Name='$Name', Password='$Password' WHERE CustomerID='$CustomerID'";
+$sql = "UPDATE product SET ProductName='$ProductName', UnitPrice='$UnitPrice', Description='$Description' WHERE ProductID='$ProductID'";
 
 
 if (mysqli_query($conn, $sql)) {
-    header("Location:customer.php");
+    header("Location:product.php");
 } else {
     echo "Error updating record: " . mysqli_error($conn);
 }
