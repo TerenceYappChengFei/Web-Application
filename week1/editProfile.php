@@ -1,8 +1,3 @@
-<?php
-if (isset($_GET['error'])) {
-    echo $_GET['error'] . "</p>";
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +5,7 @@ if (isset($_GET['error'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>Document</title>
     <style>
         table {
             border-collapse: collapse;
@@ -29,7 +24,7 @@ if (isset($_GET['error'])) {
         <a class="link" href="profile.php">Back</a>
     </button>
     <button>
-        <a class="link" href="">LogOut</a>
+        <a href="logout.php">LogOut</a>
     </button>
 
     <table width="600">
@@ -41,13 +36,22 @@ if (isset($_GET['error'])) {
         </tr>
 
         <tr>
+
+            <?php
+            if (isset($_GET['error_message'])) {
+                echo '<p style="color: red;">' . $_GET['error_message'] . '</p>';
+            }
+            ?>
+
             <form action="runEditProfile.php" method="POST">
-                <td><input type="password" name="password"></td>
-                <td><input type="password" name="confirmPassword"></td>
+
+                <td><input type="password" name="password" minlength="6"></td>
+                <td><input type="password" name="confirmPassword" minlength="6"></td>
                 <td><input type="text" name="name"></td>
-                <td><input type="number" name="yearjoin"></td>
+                <td><input type="text" name="yearjoin" maxlength="4"></td>
                 <td><input type="submit" value="Submit"></td>
             </form>
+
         </tr>
     </table>
 

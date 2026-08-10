@@ -13,11 +13,10 @@ if ($conn->connect_error) {
 }
 
 
-if(!isset($_SESSION["email"])) {
-    header("Location: login.php");
-}
+if (!isset($_SESSION["email"])) { //not equal to null
 
-$message = "";
+    header("Location:index.php");
+}
 
 ?>
 
@@ -67,11 +66,15 @@ $message = "";
                 <td><?php echo $row['description']; ?></td>
                 <td><?php echo $row['price']; ?></td>
                 <td>
-                    <a href="editBook.php?ISBN=<?php echo $row['ISBN']; ?>">
+                    <a href="editBook.php?isbn=<?php echo $row['ISBN']; ?>">
                         <input type='button' value='Edit'>
                     </a>
                 </td>
-                <td><button>Delete</button></td>
+                <td>
+                    <button onclick="confirmDelete('<?php echo $row['ISBN']; ?>')">Delete
+                    </button>
+                    </a>
+                </td>
             </tr>
         <?php
         }
@@ -79,10 +82,23 @@ $message = "";
         ?>
 
         <a href="profile.php"><input type="submit" value="Profile"></a>
-        <a href="../Exercise1/addBook.php"><input type="submit" value="Add Book"></a>
-        <a href="login.php"><input type="submit" value="LogOut"></a>
+        <a href="addBook.php"><input type="submit" value="AddBook"></a>
+        <a href="logout.php"><input type="submit" value="LogOut"></a>
 
     </table>
+
+    <script>
+        function confirmDelete(ISBN) {
+            let text = "Are you sure you want to delete the book with ISBN:" + ISBN + "?";
+
+            if (confirm(text) == true) {
+
+                window.location.href = "deleteBook.php?isbn=" + ISBN;
+            }
+        }
+    </script>
+
 </body>
+
 
 </html>
