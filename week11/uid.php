@@ -4,9 +4,6 @@ $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
 
-if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
-}
-
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,9 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             (name, Email, Age, UID)
             VALUES ('$Name', '$Email', '$Age', '$uniqueCode')";
 
-            mysqli_query($conn, $insert);
+    mysqli_query($conn, $insert);
+
+    header("Location: 3games.php");
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <br><br>
 
-    <input type="submit" value="Login">
+      <input type="submit" value="Login">
   </form>
 
   <h2>
