@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
@@ -23,20 +25,21 @@ for ($i = 0; $i < 6; $i++) {
 
 $uniqueCode = date('YmdHis') . "_" . $code;
 
+$_SESSION["UID"] = $uniqueCode;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  $Name = $_POST["name"];
-  $Email = $_POST["Email"];
-  $Age = $_POST["Age"];
+    $Name = $_POST["name"];
+    $Email = $_POST["Email"];
+    $Age = $_POST["Age"];
 
     $insert = "INSERT INTO uid
-            (name, Email, Age, UID)
-            VALUES ('$Name', '$Email', '$Age', '$uniqueCode')";
+               (name, Email, Age, UID)
+               VALUES ('$Name', '$Email', '$Age', '$uniqueCode')";
 
     mysqli_query($conn, $insert);
 
     header("Location: 3games.php");
-
 }
 
 ?>

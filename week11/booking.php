@@ -44,7 +44,7 @@ if (isset($_POST["book"])) {
         $session = mysqli_fetch_assoc($slotResult);
 
         if ($session["SessionSlots"] > 0) {
-2
+
             $insert = "INSERT INTO booking_profiles
                        (Session_ID, Email, eventname, date)
                        VALUES ('$sessionID', '$email', '$session[SessionName]', '$session[SessionDate]')";

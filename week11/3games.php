@@ -1,12 +1,10 @@
 <?php
+session_start();
 
 $servername = "localhost";
 $username = "terence243051";
 $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
-
-if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
-}
 
 
 // Create connection
@@ -18,7 +16,6 @@ if ($conn->connect_error) {
 }
 
 $message = "";
-
 
 $conn->close();
 ?>
