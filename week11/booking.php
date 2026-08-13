@@ -13,9 +13,57 @@ if ($conn->connect_error) {
 }
 
 
-if (!isset($_SESSION["email"])) { //not equal to null
+if (!isset($_SESSION["email"])) {
+    header("Location: booking_login.php");
+    exit();
+}
 
-    header("Location:index.php");
+$message = "";
+
+if (isset($_POST["book"])) {
+
+    $sessionID = $_POST["sessionID"];
+    $email = $_SESSION["email"];
+
+    $check = "SELECT * FROM booking_profiles
+              WHERE Session_ID = '$sessionID'
+              AND Email = '$email'";
+
+    $checkResult = mysqli_query($conn, $check);
+
+    if (mysqli_num_rows($checkResult) > 0) {
+
+        $message = "You have already booked this class.";
+
+    } else {
+
+        $slotQuery = "SELECT * FROM booking_sessions
+                      WHERE Session_ID = '$sessionID'";
+
+        $slotResult = mysqli_query($conn, $slotQuery);
+        $session = mysqli_fetch_assoc($slotResult);
+
+        if ($session["SessionSlots"] > 0) {
+
+            $insert = "INSERT INTO booking_profiles
+                       (Session_ID, Email)
+                       VALUES ('$sessionID', '$email')";
+
+            mysqli_query($conn, $insert);
+
+            $update = "UPDATE booking_sessions
+                       SET SessionSlots = SessionSlots - 1
+                       WHERE Session_ID = '$sessionID'";
+
+            mysqli_query($conn, $update);
+
+            $message = "Class booked successfully.";
+
+        } else {
+
+            $message = "Sorry, this class is full.";
+        }
+    }
 }
 
 ?>
@@ -46,7 +94,7 @@ if (!isset($_SESSION["email"])) { //not equal to null
     <a href="logout.php"><input type="submit" value="LogOut"></a>
 
     <h1>Classes</h1>
-
+    <p><?php echo $message; ?></p>
     <table width="1100">
         <tr>
             <th>Session ID</th>
@@ -68,11 +116,17 @@ if (!isset($_SESSION["email"])) { //not equal to null
                 <td><?php echo $row['SessionName']; ?></td>
                 <td><?php echo $row['SessionDate']; ?></td>
                 <td><?php echo $row['SessionSlots']; ?></td>
+
+                <!-- Add a form with a hidden input for the session ID and a submit button -->
                 <td>
+                    <form method="POST">
+                    <input type="hidden" name="sessionID"
 
-                        <input type='button' value='Book'>
-
+                   value="<?php echo $row['Session_ID']; ?>">
+                    <input type="submit" name="book" value="Book">
+                    </form>
                 </td>
+
             </tr>
         <?php
         }

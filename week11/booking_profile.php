@@ -40,7 +40,6 @@ $email = $_SESSION["email"];
             <th width="100">Booking_ID</th>
             <th width="250">Session_ID</th>
             <th width="150">Email</th>
-            <th>Email</th>
             <th>Event Name</th>
             <th>Date</th>
 
@@ -53,21 +52,18 @@ $email = $_SESSION["email"];
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
             <tr>
-                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['Booking_ID']; ?></td>
+                <td><?php echo $row['Session_ID']; ?></td>
                 <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['yearjoin']; ?></td>
-                <td width="100">
-                    <a href="editProfile.php">
-                        <input type='button' value='Edit'>
-                    </a>
-                </td>
+                <td><?php echo $row['eventname']; ?></td>
+                <td><?php echo $row['date']; ?></td>
             </tr>
         <?php
         }
         mysqli_close($conn);
         ?>
 
-        <a href="booklist.php"><button>Back</button></a>
+        <a href="booking.php"><button>Back</button></a>
 
     </table>
 </body>
