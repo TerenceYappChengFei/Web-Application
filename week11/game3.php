@@ -5,6 +5,7 @@ $password = "wyaslwwjz030331121139YES!";
 $dbname = "terence243051";
 session_start();
 
+$message = "";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,14 +18,29 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $uid = $_SESSION['UID'];
-    $game3 = $_POST["G3"];
+    $game1 = $_POST["G3"];
 
+    $limit = "SELECT attempts_g3 FROM uid WHERE UID = '$uid'";
+    $result = mysqli_query($conn, $limit);
+    $row = mysqli_fetch_assoc($result);
+    $attempts = $row['attempts_g3'];   
+    $attempts++;
+    
+    echo "Attempts: " . $attempts . "<br>";
 
-    $update = "UPDATE uid
-               SET G3 = '$game3'
+    if($attempts == 2) {
+        $message = "You have reached the limit of 2 attempts for Game 3.";
+    }
+    else if($attempts < 2) {
+     $update = "UPDATE uid
+               SET G3 = '$game1', attempts_g3 = '$attempts'
                WHERE UID = '$uid'";
-
+              //  $_POST['attempts']++;
+              // $updateAttempts = "UPDATE uid SET attempts = '$attempts' WHERE UID = '$uid'";
+               
     mysqli_query($conn, $update);
+    } 
+
 }
 ?>
 
@@ -51,6 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+  <a href="3games.php"><input type="submit" value="Back"></a>
+
+  <br><br>
 
   <form target="_self" method="POST">
 
@@ -73,6 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="submit" name="G3" value="5">
 
 </form>
+
+  <h2>
+    <?php echo $message;?>
+  </h2>
 
 </body>
 </html>
