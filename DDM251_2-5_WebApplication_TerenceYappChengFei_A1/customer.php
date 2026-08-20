@@ -74,7 +74,7 @@ if ($conn->connect_error) {
 
     </table>
     <button><a href="addCustomer.php"><input type="submit" value="Add Customer"></a></button>
-    <button><a href="index.php"><input type="submit" value="Logout"></a></a></button>
+    <button><a href="index.php"><input type="submit" value="Logout"></a></button>
 
 
 
