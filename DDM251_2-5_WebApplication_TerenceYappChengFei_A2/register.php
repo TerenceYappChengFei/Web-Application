@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $_POST["email"];
   $userPassword = $_POST["password"];
 
-  // Check if email and password exist in student table
-   $sql = "SELECT * FROM student 
+  // Check if email and password exist in df_user table
+   $sql = "SELECT * FROM df_user 
           WHERE email = '$email' 
           AND password = '$userPassword'";
 
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (mysqli_num_rows($result) > 0) {
     $_SESSION['email'] = $_POST['email'];
-    header("Location: booklist.php");
+    header("Location: df_index.php");
     exit();
   } else {
     $message = "No User Found";
