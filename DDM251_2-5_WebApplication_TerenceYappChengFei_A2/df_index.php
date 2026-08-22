@@ -1,104 +1,57 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "terence243051";
-$password = "wyaslwwjz030331121139YES!";
-$dbname = "terence243051";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit();
 }
 
-
-if (!isset($_SESSION["email"])) { //not equal to null
-
-    header("Location:index.php");
-}
-
+// Temporary values. These will be retrieved from the database later.
+$itemsForged = 20;
+$gold = 1000;
+$dailyGacha = "3 / 3";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week2 - Booklist</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Dwarven Forge</title>
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
-
-<style>
-    table {
-        border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-        border: 1px solid black;
-    }
-</style>
-
 <body>
-    <table width="1100">
-        <tr>
-            <th>ISBN</th>
-            <th width="300">Title</th>
-            <th width="200">Author</th>
-            <th>Description</th>
-            <th>Price(RM)</th>
-        </tr>
+  <main class="game-screen">
+    <header class="player-hud">
+      <div class="hud-column">
+        <p class="hud-box username-box"><?php echo $_SESSION["username"]; ?></p>
+        <p class="hud-box"><span class="hammer-icon"></span>Forged <?php echo $itemsForged; ?> items</p>
+      </div>
 
-        <?php
-        $query = "SELECT * FROM booklist";
+      <img class="portrait-frame" src="assets/img/UI_Portrait.png" alt="Profile">
 
-        $result = mysqli_query($conn, $query);
+      <div class="hud-column">
+        <p class="hud-box"><img src="assets/img/HUD_Coinpng.png" alt="Gold"><?php echo $gold; ?></p>
+        <p class="hud-box">Daily Gacha: <?php echo $dailyGacha; ?></p>
+      </div>
+    </header>
 
-        while ($row = mysqli_fetch_assoc($result)) {
-        ?>
+    <section class="forge-room">
+      <img class="pillar pillar-left" src="assets/img/BG_Pillar.png" alt="">
+      <img class="blacksmith" src="assets/img/dude.png" alt="Dwarven blacksmith">
+      <img class="pillar pillar-right" src="assets/img/BG_Pillar.png" alt="">
+    </section>
 
-            <tr>
-                <td><?php echo $row['ISBN']; ?></td>
-                <td><?php echo $row['title']; ?></td>
-                <td><?php echo $row['author']; ?></td>
-                <td><?php echo $row['description']; ?></td>
-                <td><?php echo $row['price']; ?></td>
-                <td>
-                    <a href="editBook.php?isbn=<?php echo $row['ISBN']; ?>">
-                        <input type='button' value='Edit'>
-                    </a>
-                </td>
-                <td>
-                    <button onclick="confirmDelete('<?php echo $row['ISBN']; ?>')">Delete
-                    </button>
-                    </a>
-                </td>
-            </tr>
-        <?php
-        }
-        mysqli_close($conn);
-        ?>
-
-        <a href="profile.php"><input type="submit" value="Profile"></a>
-        <a href="addBook.php"><input type="submit" value="AddBook"></a>
-        <a href="logout.php"><input type="submit" value="LogOut"></a>
-
-    </table>
-
-    <script>
-        function confirmDelete(ISBN) {
-            let text = "Are you sure you want to delete the book with ISBN:" + ISBN + "?";
-
-            if (confirm(text) == true) {
-
-                window.location.href = "deleteBook.php?isbn=" + ISBN;
-            }
-        }
-    </script>
-
+    <nav class="main-menu" aria-label="Main menu">
+      <a href="#" aria-label="Profile">
+        <img src="assets/img/Profile_Btn.png" alt="Profile">
+      </a>
+      <a href="#" aria-label="Forge">
+        <img src="assets/img/Forge_Btn.png" alt="Forge">
+      </a>
+      <a href="#" aria-label="Shop">
+        <img src="assets/img/Shop_Btn.png" alt="Shop">
+      </a>
+    </nav>
+  </main>
 </body>
-
-
 </html>

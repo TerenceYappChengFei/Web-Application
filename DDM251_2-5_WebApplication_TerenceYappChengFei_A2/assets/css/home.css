@@ -1,0 +1,205 @@
+@font-face {
+  font-family: "Pix32";
+  src: url("../fonts/Pix32.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Pixelate";
+  src: url("../fonts/Pixelate-Regular.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #686868;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pixelate", "Pix32", monospace;
+  background: #686868;
+}
+
+.game-screen {
+  width: min(100vw, 420px, calc(100vh * 9 / 16));
+  aspect-ratio: 9 / 16;
+  display: grid;
+  grid-template-rows: 13.5% 63% 23.5%;
+  overflow: hidden;
+  border: 2px solid #17120e;
+  background-image: url("../img/BG_Tile.png");
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  box-shadow: 0 0 24px #222222;
+}
+
+.player-hud {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  padding: 12px 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr 112px 1fr;
+  gap: 4px;
+  background-color: #c4c2b8;
+  background-image: url("../img/BG_Top_Tile_Left.png"), url("../img/BG_Top_Tile_Right.png");
+  background-position: left top, right top;
+  background-repeat: repeat-x;
+  border-bottom: 5px solid #28221c;
+}
+
+.hud-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-box {
+  height: 27px;
+  margin: 0;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  color: #ffffff;
+  background-image: url("../img/HUD_Textbox.png");
+  background-size: 100% 100%;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 1px 1px 0 #3b1a0d;
+}
+
+.username-box {
+  justify-content: center;
+}
+
+.hud-box img {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+
+.hammer-icon {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  background-image: url("../img/HUD_Hammer.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.portrait-frame {
+  position: relative;
+  z-index: 2;
+  width: 112px;
+  height: 106px;
+  margin-top: -7px;
+  object-fit: contain;
+}
+
+.forge-room {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.pillar {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: 44%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.pillar-left {
+  left: -22%;
+  clip-path: inset(0 0 0 50%);
+  transform: translateY(-50%);
+}
+
+.pillar-right {
+  right: -22%;
+  clip-path: inset(0 0 0 50%);
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.blacksmith {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -8px;
+  width: 72%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.main-menu {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  padding: 10px 14px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-image: url("../img/FG_Tile_Buttons.png");
+  background-repeat: repeat;
+  border-top: 3px solid #6f6a61;
+}
+
+.main-menu a {
+  width: 31%;
+  aspect-ratio: 113 / 114;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2%;
+  background-image: url("../img/UI_Window.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+}
+
+.main-menu img {
+  width: 72%;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 5px 3px rgba(20, 14, 10, 0.8));
+  transition: transform 0.1s;
+}
+
+.main-menu a:hover img,
+.main-menu a:focus img {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 360px) {
+  .player-hud {
+    grid-template-columns: 1fr 96px 1fr;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .portrait-frame {
+    width: 96px;
+  }
+
+  .hud-box {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 10px;
+  }
+}

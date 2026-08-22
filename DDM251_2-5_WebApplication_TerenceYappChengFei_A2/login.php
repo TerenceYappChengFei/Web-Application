@@ -17,75 +17,54 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
 $message = "";
+$enteredUsername = "";
 
-// Only run this when the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $enteredUsername = $_POST["username"];
+    $userPassword = $_POST["password"];
 
-  $email = $_POST["email"];
-  $userPassword = $_POST["password"];
+    $sql = "SELECT * FROM df_user
+            WHERE username = '$enteredUsername'
+            AND password = '$userPassword'";
+    $result = mysqli_query($conn, $sql);
 
-  // Check if email and password exist in df_user table
-   $sql = "SELECT * FROM df_user 
-          WHERE email = '$email' 
-          AND password = '$userPassword'";
-
-  $result = mysqli_query($conn, $sql);
-
-  if (mysqli_num_rows($result) > 0) {
-    $_SESSION['email'] = $_POST['email'];
-    header("Location: df_index.php");
-    exit();
-  } else {
-    $message = "No User Found";
-  }
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION["username"] = $_POST["username"];
+        header("Location: df_index.php");
+        exit();
+    } else {
+        $message = "invalid user";
+    }
 }
-
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Check</title>
-
-  <style>
-    * {
-      font-size: 20px;
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-  </style>
+  <title>Login | Dwarven Forge</title>
+  <link rel="stylesheet" href="assets/css/auth.css">
 </head>
-
 <body>
+  <main class="auth-card">
+    <form class="auth-panel login-panel" method="POST">
+      <div class="panel-content">
+        <button class="form-title" type="submit">Login</button>
 
-  <form target="_self" method="POST">
-    <h2>Enter your Email:</h2>
-    <input type="email" name="email" required>
+        <label for="username">Name:</label>
+        <input id="username" type="text" name="username" value="<?php echo $enteredUsername; ?>" required>
 
-    <br>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password" required>
 
-    <h2>Password</h2>
-    <input type="password" name="password" required>
-
-    <br><br>
-
-    <input type="submit" value="Login">
-  </form>
-
-  <h2>
-    <?php echo $message; ?>
-  </h2>
-
+        <div class="message-area">
+          <p class="error-message"><?php echo $message; ?></p>
+        </div>
+      </div>
+    </form>
+    <a class="page-link" href="register.php">Create new account</a>
+  </main>
 </body>
 </html>
