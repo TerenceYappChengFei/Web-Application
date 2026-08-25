@@ -63,7 +63,11 @@ if ($conn->connect_error) {
                         <input type='button' value='Edit'>
                     </a>
                 </td>
-                <td><input type="button" value="Delete"></a></td>
+                <td>
+                    <button onclick="confirmDelete('<?php echo $row['CustomerID']; ?>')">Delete
+                    </button>
+                    </a>
+                </td>
             </tr>
 
         <?php
@@ -77,6 +81,15 @@ if ($conn->connect_error) {
     <button><a href="index.php"><input type="submit" value="Logout"></a></button>
 
 
+    <script>
+        function confirmDelete(CustomerID) {
+            let text = "Are you sure you want to delete the customer with ID:" + CustomerID + "?";
 
+            if (confirm(text) == true) {
+
+                window.location.href = "deleteCustomer.php?CustomerID=" + CustomerID;
+            }
+        }
+    </script>
 </body>
 </html>

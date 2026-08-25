@@ -62,7 +62,12 @@ if ($conn->connect_error) {
                     <a href="editProduct.php?ProductID=<?php echo $row['ProductID']; ?>">
                         <input type='button' value='Edit'>
                     </a>
-                </td>                <td><input type="button" value="Delete"></a></td>
+                </td>
+                <td>
+                    <button onclick="confirmDelete('<?php echo $row['ProductID']; ?>')">Delete
+                    </button>
+                    </a>
+                </td>
             </tr>
 
         <?php
@@ -75,7 +80,16 @@ if ($conn->connect_error) {
     <button><a href="addProduct.php"><input type="submit" value="Add Product"></a></button>
     <button><a href="logout.php"><input type="submit" value="Logout"></a></button>
 
+    <script>
+        function confirmDelete(ProductID) {
+            let text = "Are you sure you want to delete the product with ID:" + ProductID + "?";
 
+            if (confirm(text) == true) {
+
+                window.location.href = "deleteProduct.php?ProductID=" + ProductID;
+            }
+        }
+    </script>
 
 </body>
 </html>
