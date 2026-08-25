@@ -33,6 +33,7 @@ if ($conn->connect_error) {
 </style>
 
 <body>
+    <button><a href="dashboard.php"><input type="submit" value="Dashboard"></a></button>
     <button><a href="product.php"><input type="submit" value="Product"></a></button>
     <button><a href="order.php"><input type="submit" value="Order"></a></button>
 
