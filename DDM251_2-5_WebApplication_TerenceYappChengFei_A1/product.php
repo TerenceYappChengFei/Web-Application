@@ -35,6 +35,8 @@ if ($conn->connect_error) {
 
 <body>
     <button><a href="customer.php"><input type="submit" value="Customer"></a></button>
+    <button><a href="order.php"><input type="submit" value="Order"></a></button>
+
 
     <table width="1100">
         <tr>
